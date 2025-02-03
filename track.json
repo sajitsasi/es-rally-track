@@ -1,0 +1,84 @@
+{
+  "version": 2,
+  "description": "Security event indexing and updating",
+  "indices": [
+    {
+      "name": "security-events",
+      "body": "index.json",
+      "types": ["_doc"]
+    }
+  ],
+  "corpora": [
+    {
+      "name": "security-corpus",
+      "base-url": null,
+      "documents": [
+        {
+          "source-file": "docs.json",
+          "document-count": 1726264,
+          "uncompressed-bytes": 479370428
+        }
+      ]
+    }
+  ],
+  "challenges": [
+    {
+      "name": "50-add-50-update",
+      "schedule": [
+        {
+          "operation": "bulk-add",
+          "warmup-time-period": 60,
+          "clients": 8
+        },
+        {
+          "operation": "bulk-update",
+          "warmup-time-period": 60,
+          "clients": 8
+        }
+      ]
+    },
+    {
+      "name": "40-add-60-update",
+      "default": true,
+      "schedule": [
+        {
+          "operation": "bulk-add",
+          "warmup-time-period": 60,
+          "clients": 6
+        },
+        {
+          "operation": "bulk-update",
+          "warmup-time-period": 60,
+          "clients": 10
+        }
+      ]
+    },
+    {
+      "name": "30-add-70-update",
+      "schedule": [
+        {
+          "operation": "bulk-add",
+          "warmup-time-period": 60,
+          "clients": 5
+        },
+        {
+          "operation": "bulk-update",
+          "warmup-time-period": 60,
+          "clients": 12
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "name": "bulk-add",
+      "operation-type": "bulk",
+      "bulk-size": 5000
+    },
+    {
+      "name": "bulk-update",
+      "operation-type": "bulk",
+      "bulk-size": 5000
+    }
+  ]
+}

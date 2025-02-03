@@ -1,0 +1,33 @@
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1,
+    "refresh_interval": "1s",
+    "index.mapping.total_fields.limit": 2000
+  },
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "event_id": { "type": "keyword" },
+        "timestamp": { "type": "date" },
+        "host": { "type": "keyword" },
+        "user": { "type": "keyword" },
+        "action": { "type": "keyword" },
+        "severity": { "type": "keyword" },
+        "latest": { "type": "boolean" },
+        "source_ip": { "type": "ip" },
+        "destination_ip": { "type": "ip" },
+        "geo_location": { "type": "keyword" },
+        "process_name": { "type": "keyword" },
+        "hashes": {
+          "properties": {
+            "md5": { "type": "keyword" },
+            "sha256": { "type": "keyword" }
+          }
+        },
+        "alert_category": { "type": "keyword" },
+        "detection_method": { "type": "keyword" }
+      }
+    }
+  }
+}
